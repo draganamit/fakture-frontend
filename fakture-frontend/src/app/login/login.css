@@ -1,0 +1,50 @@
+.login-container{
+    border: 1px solid grey;
+    padding: 1rem;
+    margin-right: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    width: 20rem;
+    border-radius: 5px;
+}
+
+label
+{
+    text-align: left;
+    padding: 0.4rem;
+    padding-left: 0;
+    
+    font-family: cursive;
+    padding: 0.5rem 0;
+
+}
+input {
+    width: 100%;
+    display: flex;
+    background-color: rgb(220 220 220);
+    border-color: transparent;
+    border-radius: 0.2rem;
+    height: 2rem;
+    outline: none;
+  }
+  .input {
+    text-align: left;
+    position: relative;
+    padding: 0.5rem 0;
+  }
+  .btnLogin {
+    text-align: right;
+    margin: auto 0.5rem 0.5rem auto;
+    font-size: 1rem;
+  }
+  .btnLogin > button {
+    padding: 0.5rem 1rem;
+    color: white;
+    outline: none;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    margin-top: 0.5rem;
+    cursor: pointer;
+    font-family: cursive;
+    background-color: green;
+  }

@@ -1,0 +1,42 @@
+<form class="registration-container">
+    <label style="font-size: 1.5rem;">Registracija</label>
+    <div class="name">
+        <label>Ime:</label>
+        <div class="input" >
+          <input type="text" name="name" [(ngModel)]="name">
+        </div>
+    </div>
+    <div class="surname">
+      <label>Prezime:</label>
+      <div class="input">
+        <input type="text" name="surname" [(ngModel)]="surname">
+      </div>
+    </div>
+    <div class="telephone">
+      <label>Telefon:</label>
+      <div class="input">
+      <input type="text" name="telephone" [(ngModel)]="telephone">
+    </div>
+    </div>
+    <div class="email">
+      <label>Email:</label>
+      <div class="input">
+        <input type="text" name="email" [(ngModel)]="email">
+      </div>
+    </div>
+    <div class="password">
+      <label>Lozinka:</label>
+      <div class="input">
+        <input type="password" name="password" [(ngModel)]="password">
+      </div>
+    </div>
+    <div class="password">
+        <label>Potvrdi lozinku:</label>
+        <div class="input">
+          <input type="password" name="confirmPassword" [(ngModel)]="confirmPassword">
+        </div>
+      </div>
+    <div class="btnRegistration">
+        <button (click)="registrationUser()">Registruj se</button>
+      </div>
+</form>

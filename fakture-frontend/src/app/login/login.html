@@ -1,0 +1,18 @@
+<form class="login-container">
+    <label style="font-size: 1.5rem;">Prijava</label>
+    <div class="email">
+        <label>Email:</label>
+        <div class="input">
+          <input type="text" name="email" [(ngModel)]="email">
+        </div>
+    </div>
+    <div class="password">
+      <label>Lozinka:</label>
+      <div class="input">
+        <input type="password" name="password" [(ngModel)]="password">
+      </div>
+    </div>
+    <div class="btnLogin">
+      <button (click)="loginUser()">Prijavi se</button>
+    </div>
+</form>
