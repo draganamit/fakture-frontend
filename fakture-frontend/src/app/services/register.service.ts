@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, retry } from 'rxjs';
-import { RegisterUser } from './models/regstration.model';
+import { RegisterUser } from '../models/regstration.model';
 import axios from 'axios';
 
 
