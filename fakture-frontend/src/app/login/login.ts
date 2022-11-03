@@ -11,7 +11,7 @@ import { LoginUser } from '../models/login.model';
 export class LoginComponent implements OnInit{
   constructor(private loginService: LoginService, private router: Router){}
   ngOnInit(): void {
-    if(localStorage.getItem('token'))
+    
       this.router.navigate(['facture']);
   }
   title = 'fakture-frontend';
@@ -26,19 +26,33 @@ export class LoginComponent implements OnInit{
 
   async loginUser()
   {
-    this.logUser.email=this.email;
-    this.logUser.password = this.password;
-    const res = await this.loginService.login(this.logUser);
-    alert("uspjesna");
-    localStorage.setItem('token', res.data);
-    this.router.navigate(['facture']);
-    /*this.loginService.login(this.logUser).subscribe(data =>
+    if(this.email!='' && this.password!='')
+    {
+      this.logUser.email=this.email;
+      this.logUser.password = this.password;
+      try
       {
-        localStorage.setItem('token', data);
+        const res = await this.loginService.login(this.logUser);
+        this.email ='';
+        this.password ='';
+        localStorage.setItem('token', res.data);
         this.router.navigate(['facture']);
-      },
-      error=>{
-        alert("Neuspjesn login");
-      });*/
+      }
+      catch (error) {
+        console.log("error:", error);
+      }
+      /*this.loginService.login(this.logUser).subscribe(data =>
+        {
+          localStorage.setItem('token', data);
+          this.router.navigate(['facture']);
+        },
+        error=>{
+          alert("Neuspjesn login");
+        });*/
+    }
+    else{
+      console.log("Unesite email i password");
+      
+    }
   }
 }

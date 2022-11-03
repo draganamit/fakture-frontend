@@ -36,27 +36,26 @@ export class RegistrationComponent implements OnInit{
         {
             try
             {
-            this.regUser.name = this.name;
-            this.regUser.surname = this.surname;
-            this.regUser.telephone = this.telephone;
-            this.regUser.password = this.password;
-            this.regUser.email = this.email;
-            await this.registrationService.registration(this.regUser)
-           alert("uspjesna")
+              this.regUser.name = this.name;
+              this.regUser.surname = this.surname;
+              this.regUser.telephone = this.telephone;
+              this.regUser.password = this.password;
+              this.regUser.email = this.email;
+              await this.registrationService.registration(this.regUser)
 
-            this.name = '';
-            this.surname = '';
-            this.telephone = '';
-            this.password = '';
-            this.confirmPassword = '';
+              this.name = '';
+              this.surname = '';
+              this.telephone = '';
+              this.email = '';
+              this.password = '';
+              this.confirmPassword = '';
            }
            catch (error) {
-            alert("Korisnik postoji");
+            console.log("error:", error);
           }
         }
         else{
-            alert("Neuspjesno");
-            
+            console.log("Neuspjesna registracija");  
         }
     }
 }

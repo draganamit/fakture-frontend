@@ -16,7 +16,7 @@ export class RegistrationService {
   async registration(user:RegisterUser)
   {
 
-  return  await  axios.post<Number>(this.regUrl, user);
+    return  await  axios.post<Number>(this.regUrl, user);
 
     // return this.http.post<Number>(this.regUrl,user);
   }
