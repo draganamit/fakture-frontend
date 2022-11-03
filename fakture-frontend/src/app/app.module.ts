@@ -8,8 +8,8 @@ import { RegistrationComponent } from './registration/registration';
 import {HttpClientModule} from '@angular/common/http';
 import { FactureComponent } from './facture/facture';
 import { HomeComponent } from './home/home';
-
-
+import { FactureBaseComponent } from './factureBase/factureBase';
+import { ArticleComponent } from './article/article';
 
 @NgModule({
   declarations: [
@@ -17,7 +17,9 @@ import { HomeComponent } from './home/home';
     LoginComponent,
     RegistrationComponent,
     FactureComponent,
-    HomeComponent
+    HomeComponent,
+    FactureBaseComponent,
+    ArticleComponent
   ],
   imports: [
     BrowserModule,

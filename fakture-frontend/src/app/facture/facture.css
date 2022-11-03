@@ -1,0 +1,9 @@
+.container{
+    width: 100vh;
+    height: 100vh;
+}
+.btn{
+    padding: 0.5rem;
+    font-size: 1rem;
+    width: 8rem;
+}

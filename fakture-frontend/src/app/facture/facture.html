@@ -1,3 +1,31 @@
-<div>Fakture
-    <button type="button" (click)="Logout()">Odjavi se</button>
+<div class="container">
+    <div style="display: flex; margin-bottom: 1rem;">
+        <label style="color: darkgreen;
+    font-weight: bold;
+    font-size: 1.2rem;">Fakture:</label>
+    <div style="width: 100%;
+    display: flex;
+    justify-content: end; ">
+        <button class="btn" type="button" (click)="Logout()">Odjavi se</button>
+    </div>
+    </div>
+    <div style="padding: 0.5rem;">
+        <button class="btn" type="button">Dodaj fakturu</button>
+    </div>
+    
+    <div>
+        <app-factureBase
+         *ngFor="let facture of factures"
+         [id]="facture.id"
+         [datum]="facture.datum"
+         [partner]="facture.partner"
+         [iznosBezPdv]="facture.iznosBezPdv"
+         [postoRabata]="facture.postoRabata"
+         [rabat]="facture.rabat"
+         [iznosSaRabatomBezPdv]="facture.iznosSaRabatomBezPdv"
+         [pdv]="facture.pdv"
+         [ukupno]="facture.ukupno"
+         [artikli]="facture.artikli"
+         ></app-factureBase>
+    </div>
 </div>

@@ -1,0 +1,21 @@
+.container{
+    
+    border: 1px solid grey;
+    padding: 1rem;
+    margin-left: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    width: 17rem;
+    border-radius: 5px;
+}
+label
+{
+    text-align: left;
+    padding: 0.4rem;
+    padding-left: 0;
+    font-family: cursive;
+    width: 10rem;
+    display: inline-block;
+    width: fit-content;
+
+}
