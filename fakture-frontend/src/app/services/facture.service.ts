@@ -8,9 +8,11 @@ import { ResponseModel } from '../models/response.model';
 })
 export class FactureService {
   baseUrl = "https://localhost:44350/facture/getallfacture";
-
   constructor() { }
   async getAllFacture(){
     return await axios.get<ResponseModel>(this.baseUrl);
+  }
+  async deleteFacture(id:Number){
+    return await axios.delete<ResponseModel>("https://localhost:44350/facture/"+id)
   }
 }

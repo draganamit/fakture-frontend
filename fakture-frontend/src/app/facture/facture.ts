@@ -11,6 +11,7 @@ import { FactureService } from "../services/facture.service";
   export class FactureComponent implements OnInit {
     title = 'fakture-frontend';
     factures: Facture[] = [];
+    add: boolean = false;
 
     constructor( private router: Router, private factureService: FactureService){}
   ngOnInit(): void {
@@ -26,7 +27,21 @@ import { FactureService } from "../services/facture.service";
       console.log("error:", error);
     }
   }
-
+  async deleteFacture(id:Number){
+    try {
+      await this.factureService.deleteFacture(id);
+      this.allFacture();
+    } catch (error) {
+      console.log("error:", error);
+      
+    }
+  }
+  closeWindow(){
+    this.add=false;
+  }
+  addFacture(){
+    this.add=true;
+  }
     Logout(){
       localStorage.removeItem('token');
       this.router.navigate(['']);

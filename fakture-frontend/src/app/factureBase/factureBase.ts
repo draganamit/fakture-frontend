@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Article } from '../models/article.model';
 
 
@@ -25,7 +25,11 @@ export class FactureBaseComponent implements OnInit{
   @Input() ukupno: Number | undefined;
   @Input() artikli: Article[] | undefined;
 
+  @Output() removeFacture = new EventEmitter<string>();
 
+  remove(){
+    this.removeFacture.emit();
+  }
 
 
 }

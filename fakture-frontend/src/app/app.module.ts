@@ -10,6 +10,7 @@ import { FactureComponent } from './facture/facture';
 import { HomeComponent } from './home/home';
 import { FactureBaseComponent } from './factureBase/factureBase';
 import { ArticleComponent } from './article/article';
+import { AddFactureComponent } from './addFacture/addFacture';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { ArticleComponent } from './article/article';
     FactureComponent,
     HomeComponent,
     FactureBaseComponent,
-    ArticleComponent
+    ArticleComponent,
+    AddFactureComponent
   ],
   imports: [
     BrowserModule,

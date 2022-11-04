@@ -10,10 +10,10 @@
     </div>
     </div>
     <div style="padding: 0.5rem;">
-        <button class="btn" type="button">Dodaj fakturu</button>
+        <button class="btn" type="button" (click)="addFacture()">Dodaj fakturu</button>
     </div>
     
-    <div>
+    <div style="padding-bottom: 0.5rem;">
         <app-factureBase
          *ngFor="let facture of factures"
          [id]="facture.id"
@@ -26,6 +26,12 @@
          [pdv]="facture.pdv"
          [ukupno]="facture.ukupno"
          [artikli]="facture.artikli"
+         (removeFacture) = "deleteFacture(facture.id)"
          ></app-factureBase>
+    </div>
+    <div *ngIf="add" class="mask" (click)="closeWindow()">
+        <div *ngIf="add" class="add-facture" style="height: 80%" (click)="$event.stopPropagation()">
+            <app-addFacture></app-addFacture>
+        </div>
     </div>
 </div>

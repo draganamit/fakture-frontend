@@ -1,6 +1,4 @@
 .container{
-    
-    border: 1px solid grey;
     padding: 1rem;
     margin-left: 0.5rem;
     display: flex;
@@ -21,12 +19,11 @@ label
 
 }
 input {
-    
-    background-color: rgb(220 220 220);
-    border-color: transparent;
+   
     border-radius: 0.2rem;
-    height: 2rem;
+    height: 1.5rem;
     outline: none;
+    border: 1px solid gray;
   }
   .btn{
     padding: 0.5rem;
@@ -40,3 +37,15 @@ input {
     justify-content: flex-start;
     align-items: end;
 }
+.text-div{
+    width: 13rem;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    font-family: cursive;
+}
+.input {
+    text-align: left;
+    position: relative;
+    width: 100%;
+  }
