@@ -1,65 +1,61 @@
 <div class="container">
-    <div style="display: flex;     width: 100%;">
+    <div style="display: flex;     width: 100%; gap:15px">
         <div style="width: 50%;">
             <div style="display: flex; padding-bottom: 0.3rem; align-items: center;">
                 <div class="text-div">Id:</div> 
-                <div class="input">
-                <input type="text">
+                <div class="input" style="width: 100%;">
+                    <input type="text">
                 </div>
             </div>
             <div style="display: flex; padding-bottom: 0.3rem; align-items: center;">
                 <div class="text-div">Partner:</div> 
-                <div class="input">
+                <div class="input" style="width: 100%;">
                     <input type="text">
-                    </div>
-
+                </div>
             </div>
             <div style="display: flex; padding-bottom: 0.3rem; align-items: center;">
                 <div class="text-div">Datum:</div>
-                <div class="input">
-                    <input type="text">
-                    </div>
-
+                <div class="input" style="width: 100%;">
+                    <input type="date">
+                </div>
             </div>
             <div style="display: flex; padding-bottom: 0.3rem; align-items: center;">
                 <div class="text-div">Iznos bez PDV:</div> 
-                <div class="input">
+                <div class="input" style="width: 100%;">
                     <input type="text">
-                    </div>
-                
+                </div>
             </div>
             <div style="display: flex; padding-bottom: 0.3rem; align-items: center;">
                 <div class="text-div">Posto rabata:</div> 
-                <div class="input">
+                <div class="input" style="width: 100%;">
                     <input type="text">
-                    </div>
+                </div>
             </div>
-
         </div>
         <div style="width: 50%;">
             <div style="display: flex; padding-bottom: 0.3rem; align-items: center;">
                 <div class="text-div">Rabat:</div> 
-                <div class="input">
+                <div class="input" style="width: 100%;">
                     <input type="text">
-                    </div>
+                </div>
             </div>
             <div style="display: flex; align-items: center;">
                 <div class="text-div">Iznos sa rabatom bez PDV:</div> 
-                <div class="input">
+                <div class="input" style="width: 100%;">
                     <input type="text">
-                    </div>
+                </div>
             </div>
             <div style="display: flex; padding-bottom: 0.3rem; align-items: center;">
                 <div class="text-div">PDV:</div> 
-                <div class="input">
+                <div class="input" style="width: 100%;">
                     <input type="text">
-                    </div>
+                </div>
             </div>
             <div style="display: flex; padding-bottom: 0.3rem; align-items: center;">
                 <div class="text-div">Ukupno:</div>
-                <div class="input">
+                <div class="input" style="width: 100%;">
                     <input type="text">
-                    </div>
+                </div>
             </div>
         </div>
 
@@ -71,22 +67,141 @@
         font-size: 1.2rem;">Artikli:</Label>
         <div style="display: grid;
         gap: 2rem;
-        grid-template-columns: repeat(4, 1fr);">
-            <!--<app-article
-            *ngFor="let artikal of artikli"
-            [id]="artikal.id"
-            [naziv]="artikal.naziv"
-            [kolicina]="artikal.kolicina"
-            [cijena]="artikal.cijena"
-            [iznosBezPdv]="artikal.iznosBezPdv"
-            [postoRabata]="artikal.postoRabata"
-            [rabat]="artikal.rabat"
-            [iznosSaRabatomBezPdv]="artikal.iznosSaRabatomBezPdv"
-            [pdv]="artikal.pdv"
-            [ukupno]="artikal.ukupno"
-            ></app-article>-->
-        </div>
+        grid-template-columns: repeat(2, 1fr);">
         
+        <div class="new-article">   
+            <div style="display: flex; padding-bottom: 0.3rem; align-items: center;">
+                <div class="text-div">Naziv:</div> 
+                <div class="input" >
+                    <input type="text" [(ngModel)]="newArticle.naziv">
+                </div> 
+            </div>
+            <div style="display: flex; padding-bottom: 0.3rem; align-items: center;">
+                <div class="text-div">Količina:</div> 
+                <div class="input" >
+                    <input type="text" [(ngModel)]="newArticle.kolicina">
+                </div>
+            </div>
+            <div style="display: flex; padding-bottom: 0.3rem; align-items: center;">
+                <div class="text-div">Cijena:</div> 
+                <div class="input" >
+                    <input type="text" [(ngModel)]="newArticle.cijena">
+                </div>
+            </div>
+            <div style="display: flex; padding-bottom: 0.3rem; align-items: center;">
+                <div class="text-div">Iznos bez PDV:</div> 
+                <div class="input" >
+                    <input type="text" [(ngModel)]="newArticle.iznosBezPdv">
+                </div>
+            </div>
+            <div style="display: flex; padding-bottom: 0.3rem; align-items: center;">
+                <div class="text-div">Posto rabata:</div> 
+                <div class="input" >
+                    <input type="text" [(ngModel)]="newArticle.postoRabata">
+                </div>
+            </div>
+            <div style="display: flex; padding-bottom: 0.3rem; align-items: center;">
+                <div class="text-div">Rabat:</div> 
+                <div class="input" >
+                    <input type="text" [(ngModel)]="newArticle.rabat">
+                </div>
+            </div>
+            <div style="display: flex; padding-bottom: 0.3rem; align-items: center;">
+                <div class="text-div">Iznos sa rabatom bez PDV:</div> 
+                <div class="input" >
+                    <input type="text" [(ngModel)]="newArticle.iznosSaRabatomBezPdv">
+                </div>
+            </div>
+            <div style="display: flex; padding-bottom: 0.3rem; align-items: center;">
+                <div class="text-div">PDV:</div> 
+                <div class="input" >
+                    <input type="text" [(ngModel)]="newArticle.pdv">
+                </div>
+            </div>
+            <div style="display: flex; padding-bottom: 0.3rem; align-items: center;">
+                <div class="text-div">Ukupno:</div> 
+                <div class="input" >
+                    <input type="text" [(ngModel)]="newArticle.ukupno">
+                </div>
+            </div>
+            <div style="display: flex;
+            justify-content: end;">
+                <button type="button" style="    font-size: 1rem;
+                padding: 0.2rem;
+                /* padding: 0.2rem 0.7rem; */
+                width: 5rem;" (click)="addInArticles()">Dodaj</button>
+            </div>
+        </div>
+        <div class="new-article" *ngFor="let article of articles; let index=index">   
+            <div style="display: flex; padding-bottom: 0.3rem; align-items: center;"> 
+            </div>
+            <div style="display: flex; padding-bottom: 0.3rem; align-items: center;">
+                <div class="text-div">Naziv:</div> 
+                <div class="input" >
+                    <input type="text" [(ngModel)]="article.naziv">
+                </div> 
+            </div>
+            <div style="display: flex; padding-bottom: 0.3rem; align-items: center;">
+                <div class="text-div">Količina:</div> 
+                <div class="input" >
+                    <input type="text" [(ngModel)]="article.kolicina">
+                </div>
+            </div>
+            <div style="display: flex; padding-bottom: 0.3rem; align-items: center;">
+                <div class="text-div">Cijena:</div> 
+                <div class="input" >
+                    <input type="text" [(ngModel)]="article.cijena">
+                </div>
+            </div>
+            <div style="display: flex; padding-bottom: 0.3rem; align-items: center;">
+                <div class="text-div">Iznos bez PDV:</div> 
+                <div class="input" >
+                    <input type="text" [(ngModel)]="article.iznosBezPdv">
+                </div>
+            </div>
+            <div style="display: flex; padding-bottom: 0.3rem; align-items: center;">
+                <div class="text-div">Posto rabata:</div> 
+                <div class="input" >
+                    <input type="text" [(ngModel)]="article.postoRabata">
+                </div>
+            </div>
+            <div style="display: flex; padding-bottom: 0.3rem; align-items: center;">
+                <div class="text-div">Rabat:</div> 
+                <div class="input" >
+                    <input type="text" [(ngModel)]="article.rabat">
+                </div>
+            </div>
+            <div style="display: flex; padding-bottom: 0.3rem; align-items: center;">
+                <div class="text-div">Iznos sa rabatom bez PDV:</div> 
+                <div class="input" >
+                    <input type="text" [(ngModel)]="article.iznosSaRabatomBezPdv">
+                </div>
+            </div>
+            <div style="display: flex; padding-bottom: 0.3rem; align-items: center;">
+                <div class="text-div">PDV:</div> 
+                <div class="input" >
+                    <input type="text" [(ngModel)]="article.pdv">
+                </div>
+            </div>
+            <div style="display: flex; padding-bottom: 0.3rem; align-items: center;">
+                <div class="text-div">Ukupno:</div> 
+                <div class="input" >
+                    <input type="text" [(ngModel)]="article.ukupno">
+                </div>
+            </div>
+            <div style="display: flex;
+            justify-content: end;">
+                <button type="button" style="    font-size: 1rem;
+                padding: 0.2rem;
+                /* padding: 0.2rem 0.7rem; */
+                width: 5rem;" (click)="removeFromArticles(index)">Obriši</button>
+            </div>
+        </div>
     </div>
-    
+    </div>
+    <div style="width: 100%;
+    display: flex;
+    justify-content: end; margin-top: 0.5rem;">
+        <button class="btn" type="button">Dodaj fakturu</button>
+    </div>
 </div>

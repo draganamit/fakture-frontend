@@ -23,8 +23,12 @@
     bottom: 0;
     background-color: white;
     border-radius: 0.5rem;
-    width: 50%;
+    width: fit-content;
     margin: auto;
     z-index: 2;
     min-width: 450px;
+    height: 80%;
+    display: flex;
+    flex-wrap: wrap;
+    overflow: scroll;
 }

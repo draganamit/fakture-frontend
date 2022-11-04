@@ -3,7 +3,6 @@
     margin-left: 0.5rem;
     display: flex;
     flex-direction: column;
-    width: fit-content;
     border-radius: 5px;
     margin-bottom: 1rem;
 }
@@ -19,7 +18,7 @@ label
 
 }
 input {
-   
+    width: 100%;
     border-radius: 0.2rem;
     height: 1.5rem;
     outline: none;
@@ -47,5 +46,19 @@ input {
 .input {
     text-align: left;
     position: relative;
-    width: 100%;
   }
+  .new-article{
+    border: 1px solid grey;
+    padding: 1rem;
+    margin-left: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    width: 20rem;
+    border-radius: 5px;
+    padding-bottom: 3px;
+  }
+  .btn{
+    padding: 0.5rem;
+    font-size: 1rem;
+    width: 8rem;
+}

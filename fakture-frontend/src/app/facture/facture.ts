@@ -11,7 +11,7 @@ import { FactureService } from "../services/facture.service";
   export class FactureComponent implements OnInit {
     title = 'fakture-frontend';
     factures: Facture[] = [];
-    add: boolean = false;
+    add: boolean = true;
 
     constructor( private router: Router, private factureService: FactureService){}
   ngOnInit(): void {
