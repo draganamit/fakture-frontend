@@ -69,59 +69,67 @@
         gap: 2rem;
         grid-template-columns: repeat(2, 1fr);">
         
-        <div class="new-article">   
+        <div class="new-article">  
+            <form #f="ngForm" name="form">
             <div style="display: flex; padding-bottom: 0.3rem; align-items: center;">
                 <div class="text-div">Naziv:</div> 
                 <div class="input" >
-                    <input type="text" [(ngModel)]="newArticle.naziv">
+                    <input type="text" [(ngModel)]="newArticle.naziv" name="name">
                 </div> 
             </div>
             <div style="display: flex; padding-bottom: 0.3rem; align-items: center;">
                 <div class="text-div">Količina:</div> 
                 <div class="input" >
-                    <input type="text" [(ngModel)]="newArticle.kolicina">
+                    <input type="number" [(ngModel)]="newArticle.kolicina" (ngModelChange)="kolicinaChange($event)" 
+                    name="kolicina" 
+                    (keydown)="onKeyDownEvent($event)">
                 </div>
             </div>
             <div style="display: flex; padding-bottom: 0.3rem; align-items: center;">
                 <div class="text-div">Cijena:</div> 
                 <div class="input" >
-                    <input type="text" [(ngModel)]="newArticle.cijena">
+                    <input type="number" [(ngModel)]="newArticle.cijena" (ngModelChange)="cijenaChange($event)" name="cijena" 
+                    (keydown)="onKeyDownEvent($event)">
                 </div>
             </div>
             <div style="display: flex; padding-bottom: 0.3rem; align-items: center;">
                 <div class="text-div">Iznos bez PDV:</div> 
                 <div class="input" >
-                    <input type="text" [(ngModel)]="newArticle.iznosBezPdv">
+                    <input type="number" [(ngModel)]="newArticle.iznosBezPdv" (ngModelChange)="iznosBezPdvChange($event)" name="iznosBezPdv"
+                    (keydown)="onKeyDownEvent($event)">
                 </div>
             </div>
             <div style="display: flex; padding-bottom: 0.3rem; align-items: center;">
                 <div class="text-div">Posto rabata:</div> 
                 <div class="input" >
-                    <input type="text" [(ngModel)]="newArticle.postoRabata">
+                    <input type="number" [(ngModel)]="newArticle.postoRabata" (ngModelChange)="postoRabataChange($event)" name="postoRabata"
+                    (keydown)="onKeyDownEvent($event)">
                 </div>
             </div>
             <div style="display: flex; padding-bottom: 0.3rem; align-items: center;">
                 <div class="text-div">Rabat:</div> 
                 <div class="input" >
-                    <input type="text" [(ngModel)]="newArticle.rabat">
+                    <input type="number" [(ngModel)]="newArticle.rabat" (ngModelChange)="rabataChange($event)" name="rabat"
+                    (keydown)="onKeyDownEvent($event)">
                 </div>
             </div>
             <div style="display: flex; padding-bottom: 0.3rem; align-items: center;">
                 <div class="text-div">Iznos sa rabatom bez PDV:</div> 
                 <div class="input" >
-                    <input type="text" [(ngModel)]="newArticle.iznosSaRabatomBezPdv">
+                    <input type="number" [(ngModel)]="newArticle.iznosSaRabatomBezPdv" (ngModelChange)="iznosSaRabatomBezPdvChange($event)" 
+                    name="iznostSaRabatomBezPdv" (keydown)="onKeyDownEvent($event)">
                 </div>
             </div>
             <div style="display: flex; padding-bottom: 0.3rem; align-items: center;">
                 <div class="text-div">PDV:</div> 
                 <div class="input" >
-                    <input type="text" [(ngModel)]="newArticle.pdv">
+                    <input type="number" [(ngModel)]="newArticle.pdv" (ngModelChange)="pdvChange($event)" name="pdv" (keydown)="onKeyDownEvent($event)">
                 </div>
             </div>
             <div style="display: flex; padding-bottom: 0.3rem; align-items: center;">
                 <div class="text-div">Ukupno:</div> 
                 <div class="input" >
-                    <input type="text" [(ngModel)]="newArticle.ukupno">
+                    <input type="number" [(ngModel)]="newArticle.ukupno" name="ukupno" disabled>
                 </div>
             </div>
             <div style="display: flex;
@@ -131,6 +139,7 @@
                 /* padding: 0.2rem 0.7rem; */
                 width: 5rem;" (click)="addInArticles()">Dodaj</button>
             </div>
+            </form> 
         </div>
         <div class="new-article" *ngFor="let article of articles; let index=index">   
             <div style="display: flex; padding-bottom: 0.3rem; align-items: center;"> 

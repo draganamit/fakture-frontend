@@ -1,12 +1,12 @@
 export interface Article{
     id:Number;
     naziv:string;
-    kolicina:Number;
-    cijena:Number;
-    iznosBezPdv: Number;
-    postoRabata:Number;
-    rabat:Number;
-    iznosSaRabatomBezPdv:Number;
-    pdv:Number;
-    ukupno:Number;
+    kolicina:number;
+    cijena:number;
+    iznosBezPdv: number;
+    postoRabata:number;
+    rabat:number;
+    iznosSaRabatomBezPdv:number;
+    pdv:number;
+    ukupno:number;
 }
