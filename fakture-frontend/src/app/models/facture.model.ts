@@ -1,13 +1,13 @@
 import { Article } from './article.model';
 export interface Facture{
-    id:Number;
+    id:number;
     datum: Date;
     partner: string;
-    iznosBezPdv: Number;
-    postoRabata:Number;
-    rabat:Number;
-    iznosSaRabatomBezPdv:Number;
-    pdv:Number;
-    ukupno:Number;
+    iznosBezPdv: number;
+    postoRabata:number;
+    rabat:number;
+    iznosSaRabatomBezPdv:number;
+    pdv:number;
+    ukupno:number;
     artikli:Article[];
 };

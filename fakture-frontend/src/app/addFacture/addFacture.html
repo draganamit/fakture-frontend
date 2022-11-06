@@ -10,25 +10,25 @@
             <div style="display: flex; padding-bottom: 0.3rem; align-items: center;">
                 <div class="text-div">Partner:</div> 
                 <div class="input" style="width: 100%;">
-                    <input type="text">
+                    <input type="text" [(ngModel)]="newFacture.partner">
                 </div>
             </div>
             <div style="display: flex; padding-bottom: 0.3rem; align-items: center;">
                 <div class="text-div">Datum:</div>
-                <div class="input" style="width: 100%;">
-                    <input type="date">
+                <div class="input" style="width: 100%;" >
+                    <input type="date" [(ngModel)]="newFacture.datum">
                 </div>
             </div>
             <div style="display: flex; padding-bottom: 0.3rem; align-items: center;">
                 <div class="text-div">Iznos bez PDV:</div> 
                 <div class="input" style="width: 100%;">
-                    <input type="text">
+                    <input type="text" [(ngModel)]="newFacture.iznosBezPdv" disabled>
                 </div>
             </div>
             <div style="display: flex; padding-bottom: 0.3rem; align-items: center;">
                 <div class="text-div">Posto rabata:</div> 
                 <div class="input" style="width: 100%;">
-                    <input type="text">
+                    <input type="text" [(ngModel)]="newFacture.postoRabata" disabled>
                 </div>
             </div>
         </div>
@@ -36,25 +36,25 @@
             <div style="display: flex; padding-bottom: 0.3rem; align-items: center;">
                 <div class="text-div">Rabat:</div> 
                 <div class="input" style="width: 100%;">
-                    <input type="text">
+                    <input type="text" [(ngModel)]="newFacture.rabat" disabled>
                 </div>
             </div>
             <div style="display: flex; align-items: center;">
                 <div class="text-div">Iznos sa rabatom bez PDV:</div> 
                 <div class="input" style="width: 100%;">
-                    <input type="text">
+                    <input type="text" [(ngModel)]="newFacture.iznosSaRabatomBezPdv" disabled>
                 </div>
             </div>
             <div style="display: flex; padding-bottom: 0.3rem; align-items: center;">
                 <div class="text-div">PDV:</div> 
                 <div class="input" style="width: 100%;">
-                    <input type="text">
+                    <input type="text" [(ngModel)]="newFacture.pdv" disabled>
                 </div>
             </div>
             <div style="display: flex; padding-bottom: 0.3rem; align-items: center;">
                 <div class="text-div">Ukupno:</div>
                 <div class="input" style="width: 100%;">
-                    <input type="text">
+                    <input type="text" [(ngModel)]="newFacture.ukupno" disabled>
                 </div>
             </div>
         </div>
@@ -132,13 +132,32 @@
                     <input type="number" [(ngModel)]="newArticle.ukupno" name="ukupno" disabled>
                 </div>
             </div>
-            <div style="display: flex;
+            
+            <div *ngIf="!updateArticle" style="display: flex;
             justify-content: end;">
                 <button type="button" style="    font-size: 1rem;
                 padding: 0.2rem;
                 /* padding: 0.2rem 0.7rem; */
                 width: 5rem;" (click)="addInArticles()">Dodaj</button>
             </div>
+            <div style="display: flex;
+            justify-content: end; gap: 0.5rem;">
+                <div *ngIf="updateArticle" style="display: flex;
+            justify-content: end;">
+                <button type="button" style="    font-size: 1rem;
+                padding: 0.2rem;
+                /* padding: 0.2rem 0.7rem; */
+                width: 5rem;" (click)="odbaciIzmjene()">Odbaci</button>
+                </div>
+                <div *ngIf="updateArticle" style="display: flex;
+            justify-content: end;">
+                <button type="button" style="    font-size: 1rem;
+                padding: 0.2rem;
+                /* padding: 0.2rem 0.7rem; */
+                width: 5rem;" (click)="sacuvajIzmjene()">Sačuvaj</button>
+                </div>
+            </div>
+            
             </form> 
         </div>
         <div class="new-article" *ngFor="let article of articles; let index=index">   
@@ -147,56 +166,74 @@
             <div style="display: flex; padding-bottom: 0.3rem; align-items: center;">
                 <div class="text-div">Naziv:</div> 
                 <div class="input" >
-                    <input type="text" [(ngModel)]="article.naziv">
+                    <input type="text" [(ngModel)]="article.naziv" 
+                    disabled>
                 </div> 
             </div>
             <div style="display: flex; padding-bottom: 0.3rem; align-items: center;">
                 <div class="text-div">Količina:</div> 
                 <div class="input" >
-                    <input type="text" [(ngModel)]="article.kolicina">
+                    <input type="number" [(ngModel)]="article.kolicina" 
+                    disabled>
                 </div>
             </div>
             <div style="display: flex; padding-bottom: 0.3rem; align-items: center;">
                 <div class="text-div">Cijena:</div> 
                 <div class="input" >
-                    <input type="text" [(ngModel)]="article.cijena">
+                    <input type="number" [(ngModel)]="article.cijena" 
+                    disabled>
                 </div>
             </div>
             <div style="display: flex; padding-bottom: 0.3rem; align-items: center;">
                 <div class="text-div">Iznos bez PDV:</div> 
                 <div class="input" >
-                    <input type="text" [(ngModel)]="article.iznosBezPdv">
+                    <input type="number" [(ngModel)]="article.iznosBezPdv" 
+                    disabled>
                 </div>
             </div>
             <div style="display: flex; padding-bottom: 0.3rem; align-items: center;">
                 <div class="text-div">Posto rabata:</div> 
                 <div class="input" >
-                    <input type="text" [(ngModel)]="article.postoRabata">
+                    <input type="number" [(ngModel)]="article.postoRabata" 
+                    disabled>
                 </div>
             </div>
             <div style="display: flex; padding-bottom: 0.3rem; align-items: center;">
                 <div class="text-div">Rabat:</div> 
                 <div class="input" >
-                    <input type="text" [(ngModel)]="article.rabat">
+                    <input type="number" [(ngModel)]="article.rabat" 
+                    disabled>
                 </div>
             </div>
             <div style="display: flex; padding-bottom: 0.3rem; align-items: center;">
                 <div class="text-div">Iznos sa rabatom bez PDV:</div> 
                 <div class="input" >
-                    <input type="text" [(ngModel)]="article.iznosSaRabatomBezPdv">
+                    <input type="number" [(ngModel)]="article.iznosSaRabatomBezPdv" 
+                    disabled>
                 </div>
             </div>
             <div style="display: flex; padding-bottom: 0.3rem; align-items: center;">
                 <div class="text-div">PDV:</div> 
                 <div class="input" >
-                    <input type="text" [(ngModel)]="article.pdv">
+                    <input type="number" [(ngModel)]="article.pdv" 
+                    disabled>
                 </div>
             </div>
             <div style="display: flex; padding-bottom: 0.3rem; align-items: center;">
                 <div class="text-div">Ukupno:</div> 
                 <div class="input" >
-                    <input type="text" [(ngModel)]="article.ukupno">
+                    <input type="number" [(ngModel)]="article.ukupno" disabled>
                 </div>
+            </div>
+            <div style="display: flex;     justify-content: end;
+            gap: 0.5rem">
+                <div style="display: flex;
+            justify-content: end;">
+                <button type="button" style="    font-size: 1rem;
+                padding: 0.2rem;
+                width: 5rem;" 
+                (click)="update(article, index)"
+                >Izmjeni</button>
             </div>
             <div style="display: flex;
             justify-content: end;">
@@ -205,6 +242,8 @@
                 /* padding: 0.2rem 0.7rem; */
                 width: 5rem;" (click)="removeFromArticles(index)">Obriši</button>
             </div>
+            </div>
+            
         </div>
     </div>
     </div>

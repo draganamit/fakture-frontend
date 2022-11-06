@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { map } from 'rxjs';
 import { Article } from '../models/article.model';
+import { Facture } from '../models/facture.model';
 
 
 @Component({
@@ -22,8 +23,10 @@ ngAfterViewInit() {
   })*/
   
 }
-
+  updateArticle:boolean=false;
   title = 'fakture-frontend';
+  pomPostoRabata:number = 0;
+
   newArticle: Article = {
     id: 0,
     naziv:'',
@@ -36,13 +39,39 @@ ngAfterViewInit() {
     pdv: 0,
     ukupno: 0,
   };
+  pomIndex: number =0;
   articles: Article[] = [];
-
+  newFacture: Facture ={
+    id:0,
+    datum: new Date(),
+    partner: '',
+    iznosBezPdv: 0,
+    postoRabata:0,
+    rabat:0,
+    iznosSaRabatomBezPdv:0,
+    pdv:0,
+    ukupno:0,
+    artikli:[],
+  }
   addInArticles(){
     this.articles.push(Object.assign({},this.newArticle));
+    this.izracunajVtijednostiFakture();
+    this.newArticle={
+      id: 0,
+      naziv:'',
+      kolicina: 0,
+      cijena: 0,
+      iznosBezPdv: 0,
+      postoRabata: 0,
+      rabat: 0,
+      iznosSaRabatomBezPdv: 0,
+      pdv: 0,
+      ukupno: 0,
+    }
   }
   removeFromArticles(index: number){
     this.articles.splice(index,1);
+    this.izracunajVtijednostiFakture();
   }
 
   /*
@@ -94,5 +123,66 @@ Pdv= IznosSaRabatomBezPdv * 0,17 (Zaokruženo na 2 decimale) Ukupno= IznosSaRaba
           e.preventDefault()
         }
         
+  }
+  izracunajVtijednostiFakture()
+  {
+    this.newFacture.iznosBezPdv=0;
+    this.newFacture.postoRabata=0;
+    this.newFacture.rabat=0;
+    this.newFacture.iznosSaRabatomBezPdv=0;
+    this.newFacture.pdv=0;
+    this.newFacture.ukupno=0;
+    this.newFacture.artikli=this.articles;
+    this.pomPostoRabata=0;
+
+    for(let i=0; i<this.articles.length;i++)
+    {
+      this.newFacture.iznosBezPdv=this.newFacture.iznosBezPdv+this.articles[i].iznosBezPdv;
+      this.pomPostoRabata = parseFloat(((this.pomPostoRabata+this.articles[i].postoRabata)).toFixed(2));
+      this.newFacture.rabat=parseFloat((this.newFacture.rabat+this.articles[i].rabat).toFixed(2));
+      this.newFacture.iznosSaRabatomBezPdv=parseFloat((this.newFacture.iznosSaRabatomBezPdv+this.articles[i].iznosSaRabatomBezPdv).toFixed(2));
+      this.newFacture.pdv=parseFloat((this.newFacture.pdv+this.articles[i].pdv).toFixed(2));
+      this.newFacture.ukupno=parseFloat((this.newFacture.ukupno+this.articles[i].ukupno).toFixed(2));
+    }
+    this.newFacture.postoRabata = parseFloat((this.pomPostoRabata/this.articles.length).toFixed(2));
+  }
+  update(pomUpdateArticle: Article, index:number){
+    this.newArticle=Object.assign({},pomUpdateArticle);
+    this.pomIndex = index;
+    this.updateArticle=true;
+  }
+  sacuvajIzmjene(){
+    this.articles[this.pomIndex]=this.newArticle;
+    this.izracunajVtijednostiFakture();
+
+    this.newArticle = {
+      id: 0,
+      naziv:'',
+      kolicina: 0,
+      cijena: 0,
+      iznosBezPdv: 0,
+      postoRabata: 0,
+      rabat: 0,
+      iznosSaRabatomBezPdv: 0,
+      pdv: 0,
+      ukupno: 0,
+    }
+    this.updateArticle=false;
+  }
+  odbaciIzmjene(){
+    this.newArticle = {
+      id: 0,
+      naziv:'',
+      kolicina: 0,
+      cijena: 0,
+      iznosBezPdv: 0,
+      postoRabata: 0,
+      rabat: 0,
+      iznosSaRabatomBezPdv: 0,
+      pdv: 0,
+      ukupno: 0,
+    }
+    this.updateArticle=false;
+    this.pomIndex=0;
   }
 }
