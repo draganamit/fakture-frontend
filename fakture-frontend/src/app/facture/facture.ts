@@ -11,7 +11,10 @@ import { FactureService } from "../services/facture.service";
   export class FactureComponent implements OnInit {
     title = 'fakture-frontend';
     factures: Facture[] = [];
-    add: boolean = true;
+    add: boolean = false;
+    update: boolean = false;
+    idUpdate:number = 0;
+
 
     constructor( private router: Router, private factureService: FactureService){}
   ngOnInit(): void {
@@ -36,8 +39,13 @@ import { FactureService } from "../services/facture.service";
       
     }
   }
+  updateFacture(id:number){
+    this.update=true
+    this.idUpdate=id;
+  }
   closeWindow(){
     this.add=false;
+    this.update=false;
   }
   addFacture(){
     this.add=true;

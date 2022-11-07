@@ -27,11 +27,12 @@
          [ukupno]="facture.ukupno"
          [artikli]="facture.artikli"
          (removeFacture) = "deleteFacture(facture.id)"
+         (updateFacture) = "updateFacture(facture.id)"
          ></app-factureBase>
     </div>
-    <div *ngIf="add" class="mask" (click)="closeWindow()">
-        <div *ngIf="add" class="add-facture" style="height: 80%" (click)="$event.stopPropagation()">
-            <app-addFacture></app-addFacture>
+    <div *ngIf="add || update" class="mask" (click)="closeWindow()">
+        <div *ngIf="add || update" class="add-facture" style="height: 80%" (click)="$event.stopPropagation()">
+            <app-addFacture [idUpdate]="idUpdate"></app-addFacture>
         </div>
     </div>
 </div>

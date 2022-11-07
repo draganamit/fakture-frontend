@@ -26,7 +26,12 @@ export class FactureBaseComponent implements OnInit{
   @Input() artikli: Article[] | undefined;
 
   @Output() removeFacture = new EventEmitter<string>();
+  @Output() updateFacture = new EventEmitter<string>();
 
+
+  update(){
+    this.updateFacture.emit();
+  }
   remove(){
     this.removeFacture.emit();
   }

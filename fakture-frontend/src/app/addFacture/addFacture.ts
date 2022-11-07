@@ -1,8 +1,9 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { map } from 'rxjs';
 import { Article } from '../models/article.model';
 import { Facture } from '../models/facture.model';
+import { AddFactureService } from '../services/add-facture.service';
 
 
 @Component({
@@ -11,7 +12,24 @@ import { Facture } from '../models/facture.model';
   styleUrls: ['./addFacture.css']
 })
 export class AddFactureComponent implements OnInit{
-  ngOnInit(): void {
+  constructor(private addFactureService: AddFactureService){}
+  async ngOnInit(): Promise<void> {
+      console.log(this.idUpdate);
+      if(this.idUpdate==0)
+      {
+        this.buttonText='Dodaj fakturu';
+      }
+      else{
+        this.buttonText='Sačuvaj izmjene';
+        try {
+          const response = await this.addFactureService.getFactureById(this.idUpdate);
+          console.log(response.data.data);
+          this.newFacture = response.data.data;
+          this.articles = response.data.data.artikli;
+        } catch (error) {
+          console.log("error:", error);
+        }
+      }
       
   }
   @ViewChild('f') f:any;
@@ -26,6 +44,9 @@ ngAfterViewInit() {
   updateArticle:boolean=false;
   title = 'fakture-frontend';
   pomPostoRabata:number = 0;
+  buttonText:string = '';
+  @Input() idUpdate: Number | undefined;
+
 
   newArticle: Article = {
     id: 0,
