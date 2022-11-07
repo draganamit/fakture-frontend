@@ -1,5 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { map } from 'rxjs';
 import { Article } from '../models/article.model';
 import { Facture } from '../models/facture.model';
@@ -75,6 +74,8 @@ ngAfterViewInit() {
     artikli:[],
   }
   addInArticles(){
+    if(this.newArticle.kolicina>0 && this.newArticle.cijena>0)
+    {
     this.articles.push(Object.assign({},this.newArticle));
     this.izracunajVtijednostiFakture();
     this.newArticle={
@@ -90,6 +91,14 @@ ngAfterViewInit() {
       ukupno: 0,
     }
   }
+  else{
+    console.log("Neispravan unos");
+    
+  }
+  }
+  @Output() closeAdd = new EventEmitter<string>();
+  @Output() closeUpdate = new EventEmitter<string>();
+
   removeFromArticles(index: number){
     this.articles.splice(index,1);
     this.izracunajVtijednostiFakture();
@@ -173,9 +182,10 @@ Pdv= IznosSaRabatomBezPdv * 0,17 (Zaokruženo na 2 decimale) Ukupno= IznosSaRaba
     this.updateArticle=true;
   }
   sacuvajIzmjene(){
+    if(this.newArticle.kolicina>0 && this.newArticle.cijena>0)
+    {
     this.articles[this.pomIndex]=this.newArticle;
     this.izracunajVtijednostiFakture();
-
     this.newArticle = {
       id: 0,
       naziv:'',
@@ -189,6 +199,12 @@ Pdv= IznosSaRabatomBezPdv * 0,17 (Zaokruženo na 2 decimale) Ukupno= IznosSaRaba
       ukupno: 0,
     }
     this.updateArticle=false;
+  }
+  else
+  {
+    console.log("Neispravan unos");
+    
+  }
   }
   odbaciIzmjene(){
     this.newArticle = {
@@ -205,5 +221,25 @@ Pdv= IznosSaRabatomBezPdv * 0,17 (Zaokruženo na 2 decimale) Ukupno= IznosSaRaba
     }
     this.updateArticle=false;
     this.pomIndex=0;
+  }
+  async addFacture(){
+    if(this.idUpdate==0)
+    {
+      try {
+        await this.addFactureService.addFacture(this.newFacture);
+        this.closeAdd.emit();
+      } catch (error) {
+        console.log("error:", error);
+      }
+    }
+    else
+    {
+      try {
+        await this.addFactureService.updateFacture(this.newFacture);
+        this.closeUpdate.emit();
+      } catch (error) {
+        console.log("error:", error); 
+      }
+    }
   }
 }

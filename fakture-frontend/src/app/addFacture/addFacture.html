@@ -4,7 +4,7 @@
             <div style="display: flex; padding-bottom: 0.3rem; align-items: center;">
                 <div class="text-div">Id:</div> 
                 <div class="input" style="width: 100%;">
-                    <input type="text">
+                    <input type="text" disabled>
                 </div>
             </div>
             <div style="display: flex; padding-bottom: 0.3rem; align-items: center;">
@@ -250,6 +250,6 @@
     <div style="width: 100%;
     display: flex;
     justify-content: end; margin-top: 0.5rem;">
-        <button class="btn" type="button">{{ buttonText }}</button>
+        <button class="btn" type="button" (click)="addFacture()">{{ buttonText }}</button>
     </div>
 </div>

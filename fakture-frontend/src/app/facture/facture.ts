@@ -46,13 +46,25 @@ import { FactureService } from "../services/facture.service";
   closeWindow(){
     this.add=false;
     this.update=false;
+    this.idUpdate=0;
+
   }
   addFacture(){
     this.add=true;
   }
-    Logout(){
+  async closeAddFacture(){
+    this.add=false;
+    this.idUpdate=0;
+    await this.allFacture();
+  }
+  async closeUpdateFacture(){
+    this.update=false;
+    this.idUpdate=0;
+    await this.allFacture();
+  }
+  Logout(){
       localStorage.removeItem('token');
       this.router.navigate(['']);
-    }
+  }
   }
   
