@@ -16,6 +16,7 @@ export class RegistrationComponent implements OnInit{
     ngOnInit(): void {
         
     }
+    regSuccess:boolean=false;
     name:string='';
     surname:string='';
     telephone:string='';
@@ -32,6 +33,7 @@ export class RegistrationComponent implements OnInit{
     }
 
    async registrationUser(){
+     this.regSuccess=false;
         if(this.password==this.confirmPassword)
         {
             try
@@ -42,7 +44,7 @@ export class RegistrationComponent implements OnInit{
               this.regUser.password = this.password;
               this.regUser.email = this.email;
               await this.registrationService.registration(this.regUser)
-
+              this.regSuccess=true;
               this.name = '';
               this.surname = '';
               this.telephone = '';

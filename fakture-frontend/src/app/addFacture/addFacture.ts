@@ -1,9 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { map } from 'rxjs';
+import { from, map, reduce } from 'rxjs';
 import { Article } from '../models/article.model';
 import { Facture } from '../models/facture.model';
 import { AddFactureService } from '../services/add-facture.service';
-
 
 @Component({
   selector: 'app-addFacture',
@@ -24,6 +23,8 @@ export class AddFactureComponent implements OnInit{
           const response = await this.addFactureService.getFactureById(this.idUpdate);
           console.log(response.data.data);
           this.newFacture = response.data.data;
+          
+          // this.newFacture.datum = 
           this.articles = response.data.data.artikli;
         } catch (error) {
           console.log("error:", error);
@@ -141,7 +142,7 @@ Pdv= IznosSaRabatomBezPdv * 0,17 (Zaokruženo na 2 decimale) Ukupno= IznosSaRaba
     this.izracunajVrijednosti();
   }
   izracunajVrijednosti(){
-    this.newArticle.iznosBezPdv=this.newArticle.kolicina * this.newArticle.cijena;
+    this.newArticle.iznosBezPdv=parseFloat((this.newArticle.kolicina * this.newArticle.cijena).toFixed(2));
     this.newArticle.rabat=parseFloat(((this.newArticle.postoRabata*this.newArticle.iznosBezPdv)/100).toFixed(2));
     this.newArticle.iznosSaRabatomBezPdv=parseFloat((this.newArticle.iznosBezPdv-this.newArticle.rabat).toFixed(2));
     this.newArticle.pdv=parseFloat((this.newArticle.iznosSaRabatomBezPdv*17/100).toFixed(2));
@@ -151,8 +152,7 @@ Pdv= IznosSaRabatomBezPdv * 0,17 (Zaokruženo na 2 decimale) Ukupno= IznosSaRaba
         if(e.key == 'e' || e.key=='-' || e.key=='+')
         {
           e.preventDefault()
-        }
-        
+        }   
   }
   izracunajVtijednostiFakture()
   {
@@ -165,18 +165,26 @@ Pdv= IznosSaRabatomBezPdv * 0,17 (Zaokruženo na 2 decimale) Ukupno= IznosSaRaba
     this.newFacture.artikli=this.articles;
     this.pomPostoRabata=0;
 
-    for(let i=0; i<this.articles.length;i++)
-    {
-      this.newFacture.iznosBezPdv=this.newFacture.iznosBezPdv+this.articles[i].iznosBezPdv;
-      this.pomPostoRabata = parseFloat(((this.pomPostoRabata+this.articles[i].postoRabata)).toFixed(2));
-      this.newFacture.rabat=parseFloat((this.newFacture.rabat+this.articles[i].rabat).toFixed(2));
-      this.newFacture.iznosSaRabatomBezPdv=parseFloat((this.newFacture.iznosSaRabatomBezPdv+this.articles[i].iznosSaRabatomBezPdv).toFixed(2));
-      this.newFacture.pdv=parseFloat((this.newFacture.pdv+this.articles[i].pdv).toFixed(2));
-      this.newFacture.ukupno=parseFloat((this.newFacture.ukupno+this.articles[i].ukupno).toFixed(2));
-    }
+    let iznosBezPdv = from(this.newFacture.artikli).pipe(reduce((acc,artikal) => acc + artikal.iznosBezPdv,0));
+    iznosBezPdv.subscribe(x => this.newFacture.iznosBezPdv = parseFloat(x.toFixed(2)));
+
+    let postoRabataPom = from(this.newFacture.artikli).pipe(reduce((acc,artikal) => acc + artikal.postoRabata,0));
+    postoRabataPom.subscribe(x => this.pomPostoRabata = parseFloat(x.toFixed(2)));
+
+    let rabat = from(this.newFacture.artikli).pipe(reduce((acc,artikli) => acc + artikli.rabat,0));
+    rabat.subscribe(x => this.newFacture.rabat = parseFloat(x.toFixed(2)));
+
+    let iznosSaRabatomBezPdv = from(this.newFacture.artikli).pipe(reduce((acc, artikal) => acc + artikal.iznosSaRabatomBezPdv,0));
+    iznosSaRabatomBezPdv.subscribe(x => this.newFacture.iznosSaRabatomBezPdv = parseFloat(x.toFixed(2)));
+
+    let pdv = from(this.newFacture.artikli).pipe(reduce((acc,artikal) => acc + artikal.pdv,0));
+    pdv.subscribe(x => this.newFacture.pdv = parseFloat(x.toFixed(2)));
+
+    let ukupno = from(this.newFacture.artikli).pipe(reduce((acc,artikal) => acc + artikal.ukupno,0));
+    ukupno.subscribe(x => this.newFacture.ukupno = parseFloat(x.toFixed(2)));
+  
     if(this.articles.length>0)
     {
-      
       this.newFacture.postoRabata = parseFloat((this.pomPostoRabata/this.articles.length).toFixed(2));
     }
   }
@@ -184,6 +192,8 @@ Pdv= IznosSaRabatomBezPdv * 0,17 (Zaokruženo na 2 decimale) Ukupno= IznosSaRaba
     this.newArticle=Object.assign({},pomUpdateArticle);
     this.pomIndex = index;
     this.updateArticle=true;
+    console.log(this.pomIndex);
+
   }
   sacuvajIzmjene(){
     if(this.newArticle.kolicina>0 && this.newArticle.cijena>0)
@@ -203,11 +213,11 @@ Pdv= IznosSaRabatomBezPdv * 0,17 (Zaokruženo na 2 decimale) Ukupno= IznosSaRaba
       ukupno: 0,
     }
     this.updateArticle=false;
+    this.pomIndex=-1;
   }
   else
   {
     console.log("Neispravan unos");
-    
   }
   }
   odbaciIzmjene(){
@@ -224,7 +234,7 @@ Pdv= IznosSaRabatomBezPdv * 0,17 (Zaokruženo na 2 decimale) Ukupno= IznosSaRaba
       ukupno: 0,
     }
     this.updateArticle=false;
-    this.pomIndex=0;
+    this.pomIndex=-1;
   }
   async addFacture(){
     if(this.idUpdate==0)
@@ -241,7 +251,6 @@ Pdv= IznosSaRabatomBezPdv * 0,17 (Zaokruženo na 2 decimale) Ukupno= IznosSaRaba
       else
       {
         console.log("Neispravan unos");
-        
       }
     }
     else
@@ -257,8 +266,7 @@ Pdv= IznosSaRabatomBezPdv * 0,17 (Zaokruženo na 2 decimale) Ukupno= IznosSaRaba
       }
       else
       {
-        console.log("Neispravan unos");
-        
+        console.log("Neispravan unos"); 
       }
   }
   }

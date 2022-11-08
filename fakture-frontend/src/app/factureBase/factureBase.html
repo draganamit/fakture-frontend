@@ -1,45 +1,4 @@
-<!--<div class="container">
-    <Form style="display: flex;">
-        <div style="display: flex; flex-direction: column; margin-right: 0.5rem;">
-            <div style="margin-bottom: 0.5rem;">
-                <label>Id</label>
-                <input type="text">
-            </div>
-            <div style="margin-bottom: 0.5rem;">
-                <label>Partner</label>
-                <input type="text">
-            </div>
-            <div style="margin-bottom: 0.5rem;">
-                <label>Datum</label>
-                <input type="text">
-            </div>
-            <div style="margin-bottom: 0.5rem;">
-                <label>Iznos bez PDV</label>
-                <input type="text">
-            </div>
-            
-        </div>
-        <div style="display: flex; flex-direction: column; margin-right: 0.5rem;">
-            <div style="margin-bottom: 0.5rem;">
-                <label>Posto rabata</label>
-                <input type="text">
-            </div>
-            <div style="margin-bottom: 0.5rem;">
-                <label>Iznos sa PDV bez rabata</label>
-                <input type="text">
-            </div>
-            <div style="margin-bottom: 0.5rem;">
-                <label>PDV</label>
-                <input type="text">
-            </div>
-            <div>
-                <label>Ukupno</label>
-                <input type="text">
-            </div>
-        </div>
-        
-    </Form>
-</div>-->
+
 <div class="container">
     <div style="display: flex;     width: 100%;">
         <div style="width: 50%;">
@@ -50,7 +9,7 @@
                 <label>Partner:</label> {{ partner }}
             </div>
             <div>
-                <label>Datum:</label>{{ datum }}
+                <label>Datum:</label>{{ datum | date:'dd/MM/yyyy'}}
             </div>
             <div>
                 <label>Iznos bez PDV:</label> {{ iznosBezPdv }}
