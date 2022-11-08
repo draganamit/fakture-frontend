@@ -18,4 +18,7 @@ export class AddFactureService {
   async updateFacture(updatedFacture:Facture){
     return await axios.put<ResponseModel>("https://localhost:44350/facture/"+updatedFacture.id, updatedFacture);
   }
+  async deleteArticle(id:Number | undefined){
+    return await axios.delete<ResponseModel>("https://localhost:44350/article/"+id);
+  }
 }

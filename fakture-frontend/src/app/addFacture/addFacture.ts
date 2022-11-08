@@ -13,7 +13,7 @@ import { AddFactureService } from '../services/add-facture.service';
 export class AddFactureComponent implements OnInit{
   constructor(private addFactureService: AddFactureService){}
   async ngOnInit(): Promise<void> {
-      console.log(this.idUpdate);
+      console.log(this.pomIndex);
       if(this.idUpdate==0)
       {
         this.buttonText='Dodaj fakturu';
@@ -59,7 +59,7 @@ ngAfterViewInit() {
     pdv: 0,
     ukupno: 0,
   };
-  pomIndex: number =0;
+  pomIndex: number =-1;
   articles: Article[] = [];
   newFacture: Facture ={
     id:0,
@@ -99,7 +99,7 @@ ngAfterViewInit() {
   @Output() closeAdd = new EventEmitter<string>();
   @Output() closeUpdate = new EventEmitter<string>();
 
-  removeFromArticles(index: number){
+  async removeFromArticles(index: number){
     this.articles.splice(index,1);
     this.izracunajVtijednostiFakture();
   }
@@ -174,7 +174,11 @@ Pdv= IznosSaRabatomBezPdv * 0,17 (Zaokruženo na 2 decimale) Ukupno= IznosSaRaba
       this.newFacture.pdv=parseFloat((this.newFacture.pdv+this.articles[i].pdv).toFixed(2));
       this.newFacture.ukupno=parseFloat((this.newFacture.ukupno+this.articles[i].ukupno).toFixed(2));
     }
-    this.newFacture.postoRabata = parseFloat((this.pomPostoRabata/this.articles.length).toFixed(2));
+    if(this.articles.length>0)
+    {
+      
+      this.newFacture.postoRabata = parseFloat((this.pomPostoRabata/this.articles.length).toFixed(2));
+    }
   }
   update(pomUpdateArticle: Article, index:number){
     this.newArticle=Object.assign({},pomUpdateArticle);
@@ -225,21 +229,37 @@ Pdv= IznosSaRabatomBezPdv * 0,17 (Zaokruženo na 2 decimale) Ukupno= IznosSaRaba
   async addFacture(){
     if(this.idUpdate==0)
     {
+      if(this.articles.length>0 && this.newFacture.partner!='')
+      {
       try {
         await this.addFactureService.addFacture(this.newFacture);
         this.closeAdd.emit();
       } catch (error) {
         console.log("error:", error);
       }
+      }
+      else
+      {
+        console.log("Neispravan unos");
+        
+      }
     }
     else
     {
+      if(this.articles.length>0 && this.newFacture.partner!='')
+      {
       try {
         await this.addFactureService.updateFacture(this.newFacture);
         this.closeUpdate.emit();
       } catch (error) {
         console.log("error:", error); 
       }
-    }
+      }
+      else
+      {
+        console.log("Neispravan unos");
+        
+      }
+  }
   }
 }

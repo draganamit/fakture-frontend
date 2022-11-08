@@ -160,7 +160,7 @@
             
             </form> 
         </div>
-        <div class="new-article" *ngFor="let article of articles; let index=index">   
+        <div [ngClass]="{'new-article-update' : index==pomIndex}" class="new-article" *ngFor="let article of articles; let index=index">   
             <div style="display: flex; padding-bottom: 0.3rem; align-items: center;"> 
             </div>
             <div style="display: flex; padding-bottom: 0.3rem; align-items: center;">
