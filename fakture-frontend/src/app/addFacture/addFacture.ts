@@ -32,15 +32,6 @@ export class AddFactureComponent implements OnInit{
       }
       
   }
-  @ViewChild('f') f:any;
-
-ngAfterViewInit() {
-  /*this.f.form.valueChanges.subscribe((change:any) => {
-   console.log(change)
-   this.newArticle.iznosBezPdv = change.kolicina * change.cijena;
-  })*/
-  
-}
   updateArticle:boolean=false;
   title = 'fakture-frontend';
   pomPostoRabata:number = 0;

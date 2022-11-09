@@ -41,14 +41,6 @@ export class LoginComponent implements OnInit{
       catch (error) {
         console.log("error:", error);
       }
-      /*this.loginService.login(this.logUser).subscribe(data =>
-        {
-          localStorage.setItem('token', data);
-          this.router.navigate(['facture']);
-        },
-        error=>{
-          alert("Neuspjesn login");
-        });*/
     }
     else{
       console.log("Unesite email i password");
